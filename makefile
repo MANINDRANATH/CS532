@@ -1,32 +1,16 @@
-# Compiler
-CC = gcc
+CC=gcc
+CFLAGS=-Wall -g
+TARGET=sort
 
-# Compiler flags
-CFLAGS = -Wall -Wextra -g
-
-# Source files
-SOURCES = search.c
-
-# Object files
-OBJECTS = $(SOURCES:.c=.o)
-
-# Target executable
-TARGET = search
-
-# Default target
 all: $(TARGET)
 
-# Linking the final executable
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^
+$(TARGET): sort.o
+	$(CC) $(CFLAGS) -o $(TARGET) sort.o
 
-# Compiling source files to object files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+sort.o: sort.c
+	$(CC) $(CFLAGS) -c sort.c
 
-# Clean up build files
 clean:
-	rm -f $(OBJECTS) $(TARGET)
+	rm -f $(TARGET) *.o
 
-# Phony targets
-.PHONY: all clean
+.PHONY: clean
